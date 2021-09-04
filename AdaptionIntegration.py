@@ -145,7 +145,7 @@ if __name__ == '__main__':
     retrieval_result_path = sys.argv[2]
     neural_result_path = sys.argv[3]
     threshold = float(sys.argv[4])
-    adaption_integration_nn_result = sys.argv[5]
+    adaption_integration_nn_result = retrieval_result_path
     contentTrainMethod, contentTestMethod, contentTrainAssert, contentTestAssert, saved, pscores, scores = read_data(input_config, retrieval_result_path, neural_result_path)
     
     s =  0
@@ -155,11 +155,11 @@ if __name__ == '__main__':
     # R(s,e, mode=0)
     
     adaption_index = open(join(adaption_integration_nn_result, 'adaption_index.txt'), 'w+')
-    retrieve = open(join(adaption_integration_nn_result,'adaption.txt'), 'w+')
+    retrieve = open(join(adaption_integration_nn_result,'RAadapt-NN.txt'), 'w+')
     R(s,e, mode=1)
     adaption_index.close()
 
-    learning_index = open(join(adaption_integration_nn_result, 'learning_index.txt'), 'w+')
-    retrieve = open(join(adaption_integration_nn_result,'combination.txt'), 'w+')
+    learning_index = open(join(adaption_integration_nn_result, 'CombineLearningIndex.txt'), 'w+')
+    retrieve = open(join(adaption_integration_nn_result,'Combine.txt'), 'w+')
     R(s,e, mode=2)
     learning_index.close()

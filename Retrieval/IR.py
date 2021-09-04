@@ -56,6 +56,7 @@ def IR(trainFocalMethodFile, trainAssertionFile, testFocalMethodFile, testsAsser
         tempList = trainFocalMethodList[i].split(" ")
         trainFocalTestMethodListSplit.append(tempList)
     fRecordIRResult = open(os.path.join(output_path, "IRResultTest.txt"), 'w', encoding="utf-8")
+    IRResult = open(os.path.join(output_path, "IR.txt"), 'w', encoding="utf-8")
     retrieval_save = open(os.path.join(output_path, "retrieval_test_saved"),"w+")
     correctNum = 0
     totNum = len(testFocalMethodList)
@@ -73,6 +74,7 @@ def IR(trainFocalMethodFile, trainAssertionFile, testFocalMethodFile, testsAsser
             trainFocalMethodList[maxStep] + "\n" + testFocalMethodList[i] + "\n" + trainAssertionList[maxStep] + "\n" +
             testAssertionList[i] + "\n\n")
         retrieval_save.write(str(maxValue)+ ' ' + str(maxStep) + '\n')
+        IRResult.write(trainAssertionList[maxStep]+'\n')
         if trainAssertionList[maxStep] == testAssertionList[i]:
             correctNum += 1
     fRecordIRResult.close() 
