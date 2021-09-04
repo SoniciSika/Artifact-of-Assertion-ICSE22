@@ -60,7 +60,7 @@ def IR(trainFocalMethodFile, trainAssertionFile, testFocalMethodFile, testsAsser
     correctNum = 0
     totNum = len(testFocalMethodList)
     # len(testFocalMethodList)
-    for i in range(0, 10):
+    for i in range(0, len(testFocalMethodList)):
         tempTestFocalList = testFocalMethodList[i].split(" ")
         maxStep = 0
         maxValue = -1
@@ -93,8 +93,8 @@ def IR_Train(trainFocalMethodFile, trainAssertionFile):
     retrieval_save = open(os.path.join(output_path, "retrieval_train_saved"),"w+")
     correctNum = 0
     totNum = len(trainFocalTestMethodListSplit)
-    # len(trainFocalTestMethodListSplit)
-    for i in range(0, 10):
+    # 
+    for i in range(0, len(trainFocalTestMethodListSplit)):
         tempTestFocalList = trainFocalTestMethodListSplit[i]
         maxStep = 0
         maxValue = -1
@@ -122,8 +122,8 @@ def read_data(data_path):
     test_assert = paths[3]
     return train_method, test_method, train_assert, test_assert
 if __name__ == '__main__':
-    config = "/home/sunke/data_process/config_new.txt"# sys.argv[1]
-    output_path = "./" # sys.argv[2]
+    config = sys.argv[1]
+    output_path = sys.argv[2]
     trainFocalMethodFile,  testFocalMethodFile, trainAssertionFile, testsAssertionFile= read_data(config)
     IR(trainFocalMethodFile, trainAssertionFile, testFocalMethodFile, testsAssertionFile)
     IR_Train(trainFocalMethodFile, trainAssertionFile)

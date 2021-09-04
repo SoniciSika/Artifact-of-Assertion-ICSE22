@@ -7,10 +7,10 @@ import torch
 import torch.nn as nn
 import collections
 from torch.utils.data import DataLoader
-from NeuralModel.data import AlignDataset
-from NeuralModel.biased_plabel import ESIM
+from data import AlignDataset
+from biased_plabel import ESIM
 import sys
-from NeuralModel.utils import train, validate
+from utils import train, validate
 hidden_size = 300
 dropout = 0.3
 num_classes = 2
@@ -22,8 +22,8 @@ max_grad_norm = 10
 checkpoint = None
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 save_flag = True
-load_voc = True
-split_num = 1000
+load_voc = False
+split_num = 1
 embedding_dim = 100
 voc_size = 500000
 
@@ -124,7 +124,7 @@ def inference(checkpoint):
     pickle.dump(prob_p, f)
     np.save('compatibility_saved',prob[:,0])
 
-def train(checkpoint):
+def train_process(checkpoint):
     
     valid_esmim = {
         'ids': train_idx[:split_num],
@@ -260,16 +260,16 @@ def train(checkpoint):
 
 
 if __name__ == '__main__':
-    # data_path = sys.argv[1]
+    data_path = sys.argv[1]
 
-    data_path = '/home/sunke/data_process'
+    # data_path = '/home/sunke/data_process'
     data_pd = os.path.join(data_path, 'data')
     similarity_label = os.path.join(data_path, 'cls_labels')
     similarity_align = os.path.join(data_path, 'cls_align')
     text_similarity_matrix_assert = os.path.join(data_path, 'matrix_a_t2')
     text_similarity_matrix_method = os.path.join(data_path, 'matrix_t1_t2')
-    # target_dir = sys.argv[2]
-    target_dir = '/home/sunke/ESIM-pytorch-master/save_new'
+    target_dir = sys.argv[2]
+    # target_dir = '/home/sunke/ESIM-pytorch-master/save_new'
 
     train_labels = loadlabel(similarity_label)
     train_align = loadlabel(similarity_align)
@@ -305,6 +305,6 @@ if __name__ == '__main__':
                 device=device).to(device)
     mode = sys.argv[3]
     if mode == 'train':
-        train(checkpoint)
+        train_process(checkpoint)
     else:
         inference(checkpoint)

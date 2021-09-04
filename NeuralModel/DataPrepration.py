@@ -56,9 +56,9 @@ def read_data(data_config, retrieval_output):
     fTrainAssert.close()
     fTestAssert.close()
 
-    with open(os.path.join(retrieval_output), "retrieval_train_saved") as f:
+    with open(os.path.join(retrieval_output, "retrieval_train_saved")) as f:
         saved_train = f.read().split('\n')
-    with open(os.path.join(retrieval_output), "retrieval_test_saved") as f:
+    with open(os.path.join(retrieval_output, "retrieval_test_saved")) as f:
         saved_test = f.read().split('\n')
     
     return contentTrainMethod, contentTestMethod, contentTrainAssert, contentTestAssert, saved_train, saved_test
@@ -67,6 +67,7 @@ def make_data(test_method, retrieval_method, test_assert, retrieval_assert, save
         subword_matrix_a_tokmethod2s = []
         subword_matrix_tokmethod1_tokmethod2s = []
         cnt = 0
+        # 
         for i in tqdm(range(0,len(test_method))):
             s = saved[i].strip().split()
             tokmethod2 = test_method[i]
@@ -85,13 +86,9 @@ def make_data(test_method, retrieval_method, test_assert, retrieval_assert, save
                     f5.write('\n')
                     f4.write('\n')
                 else:
-                    lost = 0
-                    fd = 0
                     na = []
-                    nb = []
                     for ii in range(len(a)):
                         if canbefind(tokmethod1, a[ii]) and not canbefind(tokmethod2, a[ii]) and canbefind(tokmethod2, b[ii]):
-                            # print(b[ii])
                             cnt += 1
                             flag = 1
                             na.append(b[ii])
@@ -126,12 +123,6 @@ def make_data(test_method, retrieval_method, test_assert, retrieval_assert, save
                         
                     else:
                         f2.writelines(str(i)+'<spex>'+tokmethod2+'<spex>'+str(i)+'<spex>'+tokmethod1+'<spex>'+str(i)+'<spex>'+' '.join(a)+'<spex>'+str(0)+'\n')
-                        # for ii in range(len(a)):
-                        #     f5.write('-1 ')
-                        #     f4.write('-1 ')
-                            
-                        # f5.write('\n')
-                        # f4.write('\n')
                     
             else:
                 f2.writelines(str(i)+'<spex>'+tokmethod2+'<spex>'+str(i)+'<spex>'+tokmethod1+'<spex>'+str(i)+'<spex>'+' '.join(a)+'<spex>'+str(0)+'\n')
@@ -169,7 +160,7 @@ if __name__ == '__main__':
     contentTrainMethod, contentTestMethod, contentTrainAssert, contentTestAssert, saved_train, saved_test = read_data(input_config, retrieval_output)
     
     output_path = sys.argv[3]
-    mode = sys.argv[4]
+    mode =  sys.argv[4]
     if mode == 'train':
         make_data(contentTrainMethod, contentTrainMethod, contentTrainAssert, contentTrainAssert, saved_train)
     else:
