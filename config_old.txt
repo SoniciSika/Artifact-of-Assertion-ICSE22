@@ -1,8 +1,0 @@
-/home/sunke/oracle/abs_train_input.txt
-/home/sunke/oracle/abs_test_input.txt
-/home/sunke/oracle/abs_train_output.txt
-/home/sunke/oracle/abs_test_output.txt
-no_unk/save_abs_test
-/home/sunke/ESIM-pytorch-master/p
-/home/sunke/ESIM-pytorch-master/cls.npy
-/home/sunke/oracle/leave_res
