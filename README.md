@@ -5,13 +5,23 @@ Depedency:
 * pytorch
 * javalang
 
+### Step1: Dataset
+unzip Dataset in ./Result and create a config file to indicate data path like:
+```
+SomeWhere/TrainMethod.txt
+SomeWhere/TestMethod.txt
+SomeWhere/TrainAssertion.txt
+SomeWhere/TestAssertion.txt
+SomeWhere/ValMethod.txt
+SomeWhere/ValMethod.txt
+```
 
-### Step1: Retrieval
+### Step2: Retrieval
 ```
 python ./Retrieval/IR.py $input_config $result_path
 ```
 
-### Step2: Adaption by Heuristic
+### Step3: Adaption by Heuristic
 
 New DataSet
 ```
@@ -23,7 +33,7 @@ Old DataSet
 ```
 python ./Retrieval/IR.py  $result_path Old
 ```
-### Step3: Training Neural Models
+### Step4: Training Neural Models
 
 #### Train:
 
@@ -45,7 +55,7 @@ Model Evaluating
 ```
 python ./NeuralModel/main.py $neural_data_path_evaluate  $neural_result_path evaluate
 ```
-### Step4: Evaluating
+### Step5: Evaluating
 1. Before Evaluate Integrated Approach, Use a deep learning generative model (i.e. [ATLAS](https://gitlab.com/cawatson/atlas---deep-learning-assert-statements/-/tree/master/)) to generate result. 
 
 2. Generate Result from Adapt NN and Integration
