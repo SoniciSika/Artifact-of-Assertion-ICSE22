@@ -1,0 +1,7 @@
+/home/sunke/oracle/train_input_.txt
+/home/sunke/oracle/test_input_.txt
+/home/sunke/oracle/train_output_.txt
+/home/sunke/oracle/test_output_.txt
+no_unk/save_test_new
+/home/sunke/ESIM-pytorch-master/p_new
+/home/sunke/ESIM-pytorch-master/cls_new.npy
