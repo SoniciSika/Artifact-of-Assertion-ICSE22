@@ -12,10 +12,17 @@ python ./Retrieval/IR.py $input_config $result_path
 ```
 
 ### Step2: Adaption by Heuristic
+
 New DataSet
-python ./Retrieval/IR.py  $result_path New
+```
+python ./Retrieval/IR.py  $result_path 
+New 
+```
+
 Old DataSet 
+```
 python ./Retrieval/IR.py  $result_path Old
+```
 ### Step3: Training Neural Models
 
 #### Train:
